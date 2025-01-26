@@ -261,6 +261,36 @@ return {
             },
         },
     },
+    ['rusty'] = {
+		label = 'Rusty Garage',
+        type = 'mechanic',
+		defaultDuty = true,
+		offDutyPay = false,
+		grades = {
+            [0] = {
+                name = 'Recruit',
+                payment = 50
+            },
+			[1] = {
+                name = 'Novice',
+                payment = 75
+            },
+			[2] = {
+                name = 'Experienced',
+                payment = 100
+            },
+			[3] = {
+                name = 'Advanced',
+                payment = 125
+            },
+			[4] = {
+                name = 'Manager',
+                isboss = true,
+                bankAuth = true,
+                payment = 150
+            },
+        },
+	},
     ['judge'] = {
         label = 'Honorary',
         defaultDuty = true,
@@ -338,14 +368,49 @@ return {
             },
         },
     },
-    ['hotdog'] = {
-        label = 'Hotdog',
+	['vpburgershot'] = {
+		label = 'vpburgershot',
         defaultDuty = true,
         offDutyPay = false,
         grades = {
             [0] = {
-                name = 'Sales',
+                name = 'novice',
                 payment = 50
+            },
+            [1] = {
+                name = 'advanced',
+                payment = 50
+            },
+            [2] = {
+                name = 'manager',
+                isboss = true,
+                bankAuth = true,
+                payment = 150
+            },
+        },
+	},
+    ['firefighter'] = {
+        label = 'Firefighter',
+        defaultDuty = true,
+        offDutyPay = false,
+        grades = {
+            ['0'] = {
+                name = 'Recruit',
+                payment = 0
+            },
+            ['1'] = {
+                name = 'Operator',
+                payment = 0
+            },
+            ['2'] = {
+                name = 'Company Officer',
+                payment = 0
+            },
+            ['3'] = {
+                name = 'Chief',
+                isboss = true, 
+                bankAuth = true,
+                payment = 0
             },
         },
     },

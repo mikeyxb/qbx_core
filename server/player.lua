@@ -1380,6 +1380,7 @@ exports('GetMoney', GetMoney)
 ---@param source Source
 ---@param citizenid string
 function DeleteCharacter(source, citizenid)
+    exports["snipe-banking"]:DeleteCharacter(citizenid)
     local license, license2 = GetPlayerIdentifierByType(source --[[@as string]], 'license'), GetPlayerIdentifierByType(source --[[@as string]], 'license2')
     local result = storage.fetchPlayerEntity(citizenid).license
     if license == result or license2 == result then

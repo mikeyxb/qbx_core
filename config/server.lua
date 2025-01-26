@@ -5,10 +5,10 @@ return {
         ---@alias MoneyType 'cash' | 'bank' | 'crypto'
         ---@alias Money {cash: number, bank: number, crypto: number}
         ---@type Money
-        moneyTypes = { cash = 500, bank = 5000, crypto = 0 }, -- type = startamount - Add or remove money types for your server (for ex. blackmoney = 0), remember once added it will not be removed from the database!
+        moneyTypes = { cash = 500, bank = 2500, crypto = 0 }, -- type = startamount - Add or remove money types for your server (for ex. blackmoney = 0), remember once added it will not be removed from the database!
         dontAllowMinus = { 'cash', 'crypto' }, -- Money that is not allowed going in minus
         paycheckTimeout = 10, -- The time in minutes that it will give the paycheck
-        paycheckSociety = false -- If true paycheck will come from the society account that the player is employed at
+        paycheckSociety = true -- If true paycheck will come from the society account that the player is employed at
     },
 
     player = {
@@ -23,14 +23,29 @@ return {
         ---@alias UniqueIdType 'citizenid' | 'AccountNumber' | 'PhoneNumber' | 'FingerId' | 'WalletId' | 'SerialNumber'
         ---@type table<UniqueIdType, {valueFunction: function}>
         identifierTypes = {
+            -- citizenid = {
+            --     valueFunction = function()
+            --         return lib.string.random('A.......')
+            --     end,
+            -- },
             citizenid = {
                 valueFunction = function()
-                    return lib.string.random('A.......')
+                -- Get the last used citizenid from the database
+                local result = MySQL.Sync.fetchScalar('SELECT value FROM last_citizenid', {})
+
+                -- Increment the last used citizenid
+                local newCitizenid = result + 1
+
+                -- Update the last used citizenid in the database
+                MySQL.Sync.execute('UPDATE last_citizenid SET value = :value', { value = newCitizenid })
+
+                -- Return the new citizenid
+                return tostring(newCitizenid)
                 end,
             },
             AccountNumber = {
                 valueFunction = function()
-                    return 'US0' .. math.random(1, 9) .. 'QBX' .. math.random(1111, 9999) .. math.random(1111, 9999) .. math.random(11, 99)
+                    return 'US0' .. math.random(1, 9) .. 'RMX' .. math.random(1111, 9999) .. math.random(1111, 9999) .. math.random(11, 99)
                 end,
             },
             PhoneNumber = {
@@ -45,7 +60,7 @@ return {
             },
             WalletId = {
                 valueFunction = function()
-                    return 'QB-' .. math.random(11111111, 99999999)
+                    return 'RM-' .. math.random(11111111, 99999999)
                 end,
             },
             SerialNumber = {

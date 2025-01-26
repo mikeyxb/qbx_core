@@ -4722,8 +4722,8 @@ return {
         model = 'police3',
         price = 80470,
         category = 'emergency',
-        type = 'automobile',hash = `police3`,
-
+        type = 'automobile',
+        hash = `police3`,
     },
     police4 = {
         name = 'Unmarked Cruiser',
